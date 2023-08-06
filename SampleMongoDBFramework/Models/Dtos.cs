@@ -2,6 +2,10 @@
 
 namespace SampleMongoDBFramework.Models
 {
+	// Create DTO for exchange data between frontend and backend to database
+	// Use record for normalItemm, createItem and updateItem. each properties like item's model but cut some propereties off or add some properties for exchange data
+	// When use model to DTO. This project use extension as AsDto() which define in extension.cs
+
 	#region Document
 
 	public record DocumentDto(object Id, Guid DocumentId, string DocumentName, int PageCount, DateTimeOffset? PublishDate);

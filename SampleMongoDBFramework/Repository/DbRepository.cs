@@ -104,6 +104,7 @@ namespace SampleMongoDBFramework.Repository
 
 		public async Task CreateProvince(CreateProvinceDto createProvinceDto)
 		{
+			// Add new province and all amphurs in province
 			Province province = new Province()
 			{
 				ProvinceId = createProvinceDto.ProvinceId,
@@ -119,6 +120,8 @@ namespace SampleMongoDBFramework.Repository
 		{
 			Province province = await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 
+			// This function will update province data and replace all amphur.
+			// Caution: sub document like amphur will change all by updateProvinceDto.Amphurs. If your condition will update only province data not amphur you will get old amphur list and add back (not use in updateProvinceDto);
 			if (province != null)
 			{
 				province.ProvinceName = updateProvinceDto.provinceName;
@@ -179,6 +182,7 @@ namespace SampleMongoDBFramework.Repository
 				// Convert to update province
 				UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, province.Amphurs);
 
+				// Call update province
 				await UpdateProvince(createAmphurDto.provinceId, updateProvinceDto);
 			}
 		}
@@ -187,6 +191,8 @@ namespace SampleMongoDBFramework.Repository
 		{
 			Province province = await GetProvince(provinceId);
 
+			// Loop to updat amphur in list
+			// Caution: amphur document can change all data so you shoud add amphurId from function header for find reference in list and amphurId can change to difference value.
 			foreach (Amphur amphur in province.Amphurs)
 			{
 				if (amphur.AmphurId == amphurId)
@@ -205,10 +211,15 @@ namespace SampleMongoDBFramework.Repository
 		{
 			// Delete amphur can't delete from collection so make new collection and add old data except delete data.
 			Province province = await GetProvince(provinceId);
-			List<Amphur> acceptAmphurs = province.Amphurs.Where(q => q.AmphurId != amphurId).ToList();
-			UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, acceptAmphurs);
 
-			await UpdateProvince(provinceId, updateProvinceDto);
+			if (province != null)
+			{
+				// Create new amphur list without deleted amphur then add back to updateProvince
+				List<Amphur> acceptAmphurs = province.Amphurs.Where(q => q.AmphurId != amphurId).ToList();
+				UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, acceptAmphurs);
+
+				await UpdateProvince(provinceId, updateProvinceDto);
+			}
 		}
 
 		#endregion Amphur

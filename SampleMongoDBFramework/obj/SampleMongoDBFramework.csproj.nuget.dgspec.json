@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\warakorn.kid\\source\\repos\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj": {}
+    "C:\\GitHub\\SampleMongoDBFramework\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj": {}
   },
   "projects": {
-    "C:\\Users\\warakorn.kid\\source\\repos\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj": {
+    "C:\\GitHub\\SampleMongoDBFramework\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\warakorn.kid\\source\\repos\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj",
+        "projectUniqueName": "C:\\GitHub\\SampleMongoDBFramework\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj",
         "projectName": "SampleMongoDBFramework",
-        "projectPath": "C:\\Users\\warakorn.kid\\source\\repos\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj",
+        "projectPath": "C:\\GitHub\\SampleMongoDBFramework\\SampleMongoDBFramework\\SampleMongoDBFramework.csproj",
         "packagesPath": "C:\\Users\\warakorn.kid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\warakorn.kid\\source\\repos\\SampleMongoDBFramework\\obj\\",
+        "outputPath": "C:\\GitHub\\SampleMongoDBFramework\\SampleMongoDBFramework\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",

@@ -3,6 +3,10 @@ using SampleMongoDBFramework.Models.Entities;
 
 namespace SampleMongoDBFramework
 {
+	// This class use fro convert model to itemDto.
+	// Each model will define AsDto function here.
+	// This class and all functions must use static for easy to call at the end of data.
+
 	public static class Extensions
 	{
 		public static DocumentDto AsDto(this Document document)
