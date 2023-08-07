@@ -21,7 +21,7 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<DocumentDto>> GetAsync(Guid id)
 		{
-			Document document = await _repository.GetDcoumentByDocumentId(id);
+			Document document = await _repository.GetDocumentByDocumentIdAsync(id);
 
 			if (document == null)
 			{
@@ -34,7 +34,7 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpGet]
 		public async Task<IEnumerable<DocumentDto>> GetAsync()
 		{
-			var documents = (await _repository.GetDocuments()).Select(q => q.AsDto());
+			var documents = (await _repository.GetDocumentsAsync()).Select(q => q.AsDto());
 
 			return documents;
 		}
@@ -42,19 +42,19 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpPost]
 		public async Task PostAsync(CreateDocumentDto createDocumetnDto)
 		{
-			await _repository.CreateDocument(createDocumetnDto);
+			await _repository.CreateDocumentAsync(createDocumetnDto);
 		}
 
 		[HttpPut]
 		public async Task PutAsync(Guid documentId, UpdateDocumentDto updateDocumentDto)
 		{
-			await _repository.UpdateDocument(documentId, updateDocumentDto);
+			await _repository.UpdateDocumentAsync(documentId, updateDocumentDto);
 		}
 
 		[HttpDelete]
 		public async Task DeleteAsync(Guid documentId)
 		{
-			await _repository.DeleteDocument(documentId);
+			await _repository.DeleteDocumentAsync(documentId);
 		}
 	}
 }

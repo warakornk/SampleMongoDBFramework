@@ -7,43 +7,43 @@ namespace SampleMongoDBFramework.Repository.Interface
 	{
 		#region Document
 
-		public Task<Document> GetDcoumentByDocumentId(Guid documentId);
+		public Task<Document> GetDocumentByDocumentIdAsync(Guid documentId);
 
-		public Task<List<Document>> GetDocuments();
+		public Task<List<Document>> GetDocumentsAsync();
 
-		public Task CreateDocument(CreateDocumentDto createDocumentDto);
+		public Task CreateDocumentAsync(CreateDocumentDto createDocumentDto);
 
-		public Task UpdateDocument(Guid documentId, UpdateDocumentDto updateDocumentDto);
+		public Task UpdateDocumentAsync(Guid documentId, UpdateDocumentDto updateDocumentDto);
 
-		public Task DeleteDocument(Guid documentId);
+		public Task DeleteDocumentAsync(Guid documentId);
 
 		#endregion Document
 
 		#region Province
 
-		public Task<List<Province>> GetProvinces();
+		public Task<List<Province>> GetProvincesAsync();
 
-		public Task<Province> GetProvince(string provinceId);
+		public Task<Province> GetProvinceAsync(string provinceId);
 
-		public Task CreateProvince(CreateProvinceDto createProvinceDto);
+		public Task CreateProvinceAsync(CreateProvinceDto createProvinceDto);
 
-		public Task UpdateProvince(string provinceId, UpdateProvinceDto updateProvinceDto);
+		public Task UpdateProvinceAsync(string provinceId, UpdateProvinceDto updateProvinceDto);
 
-		public Task DeleteProvince(string provinceId);
+		public Task DeleteProvinceAsync(string provinceId);
 
 		#endregion Province
 
 		#region Amphur
 
-		public Task<List<Amphur>> GetAmphurs(string provinceId);
+		public Task<List<Amphur>> GetAmphursAsync(string provinceId);
 
-		public Task<Amphur?> GetAmphur(string provinceId, string amphurId);
+		public Task<Amphur?> GetAmphurAsync(string provinceId, string amphurId);
 
-		public Task CreateAmphur(CreateAmphurDto createAmphurDto);
+		public Task CreateAmphurAsync(CreateAmphurDto createAmphurDto);
 
-		public Task UpdateAmphur(string provinceId, string amphurId, UpdateAmphurDto updateAmphurDto);
+		public Task UpdateAmphurAsync(string provinceId, string amphurId, UpdateAmphurDto updateAmphurDto);
 
-		public Task DeleteAmphur(string provinceId, string amphueId);
+		public Task DeleteAmphurAsync(string provinceId, string amphueId);
 
 		#endregion Amphur
 	}

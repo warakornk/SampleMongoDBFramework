@@ -20,26 +20,26 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpGet]
 		public async Task<IEnumerable<ProvinceDto>> GetAsync()
 		{
-			var provinces = (await _repository.GetProvinces()).Select(q => q.AsDto());
+			var provinces = (await _repository.GetProvincesAsync()).Select(q => q.AsDto());
 			return provinces;
 		}
 
 		[HttpPost]
 		public async Task PostAsync(CreateProvinceDto createProvinceDto)
 		{
-			await _repository.CreateProvince(createProvinceDto);
+			await _repository.CreateProvinceAsync(createProvinceDto);
 		}
 
 		[HttpPut]
 		public async Task PutAsync(string provinceId, UpdateProvinceDto updateProvinceDto)
 		{
-			await _repository.UpdateProvince(provinceId, updateProvinceDto);
+			await _repository.UpdateProvinceAsync(provinceId, updateProvinceDto);
 		}
 
 		[HttpDelete]
 		public async Task DeleteAsync(string provinceId)
 		{
-			await _repository.DeleteProvince(provinceId);
+			await _repository.DeleteProvinceAsync(provinceId);
 		}
 	}
 }

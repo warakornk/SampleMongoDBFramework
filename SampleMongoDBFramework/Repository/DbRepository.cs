@@ -27,17 +27,17 @@ namespace SampleMongoDBFramework.Repository
 
 		#region Document
 
-		public async Task<Document> GetDcoumentByDocumentId(Guid documentId)
+		public async Task<Document> GetDocumentByDocumentIdAsync(Guid documentId)
 		{
 			return await _context.Documents.FirstOrDefaultAsync(q => q.DocumentId == documentId);
 		}
 
-		public async Task<List<Document>> GetDocuments()
+		public async Task<List<Document>> GetDocumentsAsync()
 		{
 			return await _context.Documents.ToListAsync();
 		}
 
-		public async Task CreateDocument(CreateDocumentDto createDocumentDto)
+		public async Task CreateDocumentAsync(CreateDocumentDto createDocumentDto)
 		{
 			Document document = new Document()
 			{
@@ -57,7 +57,7 @@ namespace SampleMongoDBFramework.Repository
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task UpdateDocument(Guid documentId, UpdateDocumentDto updateDocumentDto)
+		public async Task UpdateDocumentAsync(Guid documentId, UpdateDocumentDto updateDocumentDto)
 		{
 			Document document = await _context.Documents.FirstOrDefaultAsync(q => q.DocumentId == documentId);
 
@@ -77,7 +77,7 @@ namespace SampleMongoDBFramework.Repository
 			}
 		}
 
-		public async Task DeleteDocument(Guid documentId)
+		public async Task DeleteDocumentAsync(Guid documentId)
 		{
 			Document document = await _context.Documents.FirstOrDefaultAsync(q => q.DocumentId == documentId);
 
@@ -92,17 +92,17 @@ namespace SampleMongoDBFramework.Repository
 
 		#region Province
 
-		public async Task<List<Province>> GetProvinces()
+		public async Task<List<Province>> GetProvincesAsync()
 		{
 			return await _context.Provinces.OrderBy(q => q.ProvinceName).ToListAsync();
 		}
 
-		public async Task<Province> GetProvince(string provinceId)
+		public async Task<Province> GetProvinceAsync(string provinceId)
 		{
 			return await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 		}
 
-		public async Task CreateProvince(CreateProvinceDto createProvinceDto)
+		public async Task CreateProvinceAsync(CreateProvinceDto createProvinceDto)
 		{
 			// Add new province and all amphurs in province
 			Province province = new Province()
@@ -116,7 +116,7 @@ namespace SampleMongoDBFramework.Repository
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task UpdateProvince(string provinceId, UpdateProvinceDto updateProvinceDto)
+		public async Task UpdateProvinceAsync(string provinceId, UpdateProvinceDto updateProvinceDto)
 		{
 			Province province = await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 
@@ -132,7 +132,7 @@ namespace SampleMongoDBFramework.Repository
 			}
 		}
 
-		public async Task DeleteProvince(string provinceId)
+		public async Task DeleteProvinceAsync(string provinceId)
 		{
 			Province province = await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 
@@ -147,14 +147,14 @@ namespace SampleMongoDBFramework.Repository
 
 		#region Amphur
 
-		public async Task<List<Amphur>> GetAmphurs(string provinceId)
+		public async Task<List<Amphur>> GetAmphursAsync(string provinceId)
 		{
 			Province province = await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 
 			return province.Amphurs.OrderBy(q => q.AmphurName).ToList();
 		}
 
-		public async Task<Amphur?> GetAmphur(string provinceId, string amphurId)
+		public async Task<Amphur?> GetAmphurAsync(string provinceId, string amphurId)
 		{
 			Province province = await _context.Provinces.FirstOrDefaultAsync(q => q.ProvinceId == provinceId);
 			Amphur? amphur = province.Amphurs.FirstOrDefault(q => q.AmphurId == amphurId);
@@ -162,7 +162,7 @@ namespace SampleMongoDBFramework.Repository
 			return amphur;
 		}
 
-		public async Task CreateAmphur(CreateAmphurDto createAmphurDto)
+		public async Task CreateAmphurAsync(CreateAmphurDto createAmphurDto)
 		{
 			// Prepair new amhphur data
 			Amphur amphur = new Amphur()
@@ -172,7 +172,7 @@ namespace SampleMongoDBFramework.Repository
 			};
 
 			// Get province which this ammphur will add in
-			Province province = await GetProvince(createAmphurDto.provinceId);
+			Province province = await GetProvinceAsync(createAmphurDto.provinceId);
 
 			// Check is not null
 			if (province != null)
@@ -183,13 +183,13 @@ namespace SampleMongoDBFramework.Repository
 				UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, province.Amphurs);
 
 				// Call update province
-				await UpdateProvince(createAmphurDto.provinceId, updateProvinceDto);
+				await UpdateProvinceAsync(createAmphurDto.provinceId, updateProvinceDto);
 			}
 		}
 
-		public async Task UpdateAmphur(string provinceId, string amphurId, UpdateAmphurDto updateAmphurDto)
+		public async Task UpdateAmphurAsync(string provinceId, string amphurId, UpdateAmphurDto updateAmphurDto)
 		{
-			Province province = await GetProvince(provinceId);
+			Province province = await GetProvinceAsync(provinceId);
 
 			// Loop to updat amphur in list
 			// Caution: amphur document can change all data so you shoud add amphurId from function header for find reference in list and amphurId can change to difference value.
@@ -204,13 +204,13 @@ namespace SampleMongoDBFramework.Repository
 
 			UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, province.Amphurs);
 
-			await UpdateProvince(provinceId, updateProvinceDto);
+			await UpdateProvinceAsync(provinceId, updateProvinceDto);
 		}
 
-		public async Task DeleteAmphur(string provinceId, string amphurId)
+		public async Task DeleteAmphurAsync(string provinceId, string amphurId)
 		{
 			// Delete amphur can't delete from collection so make new collection and add old data except delete data.
-			Province province = await GetProvince(provinceId);
+			Province province = await GetProvinceAsync(provinceId);
 
 			if (province != null)
 			{
@@ -218,7 +218,7 @@ namespace SampleMongoDBFramework.Repository
 				List<Amphur> acceptAmphurs = province.Amphurs.Where(q => q.AmphurId != amphurId).ToList();
 				UpdateProvinceDto updateProvinceDto = new UpdateProvinceDto(province.ProvinceId, province.ProvinceName, acceptAmphurs);
 
-				await UpdateProvince(provinceId, updateProvinceDto);
+				await UpdateProvinceAsync(provinceId, updateProvinceDto);
 			}
 		}
 

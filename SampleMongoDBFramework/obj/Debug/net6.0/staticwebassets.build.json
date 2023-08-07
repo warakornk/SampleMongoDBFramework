@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "37F1pxXCAHMq1DkOTmbBbqjrpOsakoSk/ZGRiZRG+gk=",
+  "Source": "SampleMongoDBFramework",
+  "BasePath": "_content/SampleMongoDBFramework",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

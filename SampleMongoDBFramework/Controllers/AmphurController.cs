@@ -20,14 +20,14 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpGet("{provinceId}")]
 		public async Task<IEnumerable<AmphurDto>> GetAsync(string provinceId)
 		{
-			var amphurs = (await _repository.GetAmphurs(provinceId)).Select(q => q.AsDto(provinceId));
+			var amphurs = (await _repository.GetAmphursAsync(provinceId)).Select(q => q.AsDto(provinceId));
 			return amphurs;
 		}
 
 		[HttpGet("{provinceId}/{amphurId}")]
 		public async Task<ActionResult<AmphurDto>> GetAmphurAsync(string provinceId, string amphurId)
 		{
-			var amphur = (await _repository.GetAmphur(provinceId, amphurId));
+			var amphur = (await _repository.GetAmphurAsync(provinceId, amphurId));
 
 			if (amphur == null)
 			{
@@ -39,19 +39,19 @@ namespace SampleMongoDBFramework.Controllers
 		[HttpPost]
 		public async Task PostAsync(CreateAmphurDto createAmphurDto)
 		{
-			await _repository.CreateAmphur(createAmphurDto);
+			await _repository.CreateAmphurAsync(createAmphurDto);
 		}
 
 		[HttpPut]
 		public async Task PutAsync(string provinceId, string amphurId, UpdateAmphurDto updateAmphurDto)
 		{
-			await _repository.UpdateAmphur(provinceId, amphurId, updateAmphurDto);
+			await _repository.UpdateAmphurAsync(provinceId, amphurId, updateAmphurDto);
 		}
 
 		[HttpDelete]
 		public async Task DeleteAsync(string provinceId, string amphurId)
 		{
-			await _repository.DeleteAmphur(provinceId, amphurId);
+			await _repository.DeleteAmphurAsync(provinceId, amphurId);
 		}
 	}
 }
