@@ -5,6 +5,7 @@ namespace SampleMongoDBFramework.Models
 	// Create DTO for exchange data between frontend and backend to database
 	// Use record for normalItemm, createItem and updateItem. each properties like item's model but cut some propereties off or add some properties for exchange data
 	// When use model to DTO. This project use extension as AsDto() which define in extension.cs
+	// Coution: Subdocument in collection can be null. Ex, Amphur in province should use nullable variable
 
 	#region Document
 
@@ -16,9 +17,9 @@ namespace SampleMongoDBFramework.Models
 
 	#region Province
 
-	public record ProvinceDto(object Id, string ProvinceId, string provinceName, List<Amphur> Amphurs);
-	public record CreateProvinceDto(string ProvinceId, string provinceName, List<Amphur> Amphurs);
-	public record UpdateProvinceDto(string ProvinceId, string provinceName, List<Amphur> Amphurs);
+	public record ProvinceDto(object Id, string ProvinceId, string provinceName, List<Amphur>? Amphurs);
+	public record CreateProvinceDto(string ProvinceId, string provinceName, List<Amphur>? Amphurs);
+	public record UpdateProvinceDto(string ProvinceId, string provinceName, List<Amphur>? Amphurs);
 
 	#endregion Province
 

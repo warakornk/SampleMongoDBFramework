@@ -109,10 +109,11 @@ namespace SampleMongoDBFramework.Repository
 			{
 				ProvinceId = createProvinceDto.ProvinceId,
 				ProvinceName = createProvinceDto.provinceName,
-				Amphurs = createProvinceDto.Amphurs
+				Amphurs = createProvinceDto.Amphurs ?? new List<Amphur>()
 			};
 
 			_context.Provinces.Add(province);
+
 			await _context.SaveChangesAsync();
 		}
 
@@ -125,7 +126,7 @@ namespace SampleMongoDBFramework.Repository
 			if (province != null)
 			{
 				province.ProvinceName = updateProvinceDto.provinceName;
-				province.Amphurs = updateProvinceDto.Amphurs;
+				province.Amphurs = updateProvinceDto.Amphurs ?? new List<Amphur>(); ;
 
 				_context.Provinces.Update(province);
 				await _context.SaveChangesAsync();
